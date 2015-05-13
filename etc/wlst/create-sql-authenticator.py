@@ -1,11 +1,11 @@
 # variables
 username = 'weblogic'
 password = 'welcome1'
-URL='t3://localhost:12120'
+URL='t3://localhost:7001'
 domain='base_domain'
 realm='myrealm'
 realm_path='/SecurityConfiguration/'+domain+'/Realms/'+realm
-datasourceName='OE'
+datasourceName='jdbc/OE'
 
 # Connect and Activate Edit Mode
 connect(username,password,URL)
