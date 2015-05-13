@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <!-- Custom styles for this template -->
+        <link href="css/cover.css" rel="stylesheet" />
+        <link href="css/prettify.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+    </h:head>
+
+    <body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{bundle.ListProductInformationTitle}"></h:outputText>
+            </ui:define>
+            <ui:define name="content">
+                <!--<div class="inner cover text-left" style="margin-top: 90px;">-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title"><strong>Your basket</strong></h1>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form" id="formulario">
+                                        <div class="row">
+                                            <div class="form-group col-md-8">
+                                                <h:panelGroup layout="block" styleClass="text-center">
+                                                    <h:messages warnClass="text-warning" errorClass="text-danger" infoClass="text-info" layout="table"/>
+                                                </h:panelGroup>
+
+                                                <h:panelGroup layout="block" style="width: 100%" styleClass="text-center text-info h5" rendered="#{empty basket.products and empty facesContext.messageList}">
+                                                    <br/><br/>
+                                                    You haven't added any product yet to your basket. Go <h:link value="shopping" outcome="/shop/Shop" />!
+                                                </h:panelGroup>
+
+                                                <h:dataTable id="tabelaProdutos" value="#{basket.products}" var="item"
+                                                             columnClasses="col80p,col20p" rendered="#{not empty basket.products}"
+                                                             styleClass="table table-striped" style="width: 90%; text-align: left">
+
+                                                    <h:column id="colProductId">
+                                                        <f:facet name="header">Product Id</f:facet>
+                                                        <h:outputText value="#{item.product.productId}" />
+                                                    </h:column>
+
+                                                    <h:column id="colProductName">
+                                                        <f:facet name="header">Product Name</f:facet>
+                                                        <h:outputText value="#{item.product.productName}" escape="true" />
+                                                    </h:column>
+
+                                                    <h:column id="colPrice">
+                                                        <f:facet name="header">Price</f:facet>
+                                                        <h:outputText value="#{item.product.listPrice}" />
+                                                    </h:column>
+
+                                                    <h:column id="colQuantidade" >
+                                                        <f:facet name="header">Quantity</f:facet>
+                                                        <h:outputText value="#{item.quantity}" />
+                                                    </h:column>
+
+                                                    <h:column id="colProduto">
+                                                        <f:facet name="header">Action</f:facet>
+                                                        <h:commandButton action="#{basket.removeItem(item)}" value="Remove" styleClass="btn btn-danger glyphicon glyphicon-minus" />                                                    
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <div class="row">
+                                                    <h2>Total:</h2>
+                                                    <h3>$ #{basket.total}</h3>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <div class="col-md-4">
+                                                        <h:commandButton action="#{basket.clearBasket()}" value="Clear Basket" styleClass="btn btn-danger" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h:link value="Keep shopping!" outcome="/shop/Shop" styleClass="btn btn-warning" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h:commandButton type="submit" styleClass="btn btn-success" value="Checkout" action="#{basket.checkout()}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bootstrap core JavaScript
+                ================================================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+                <script>
+                    $(function () {
+                        $(".listaProdutos").filterByText($('#filtroProdutos'));
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

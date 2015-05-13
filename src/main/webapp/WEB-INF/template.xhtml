@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="author" content="bruno.borges@oracle.com"/>
+        <meta name="description" content=""/>
+
+        <title>Order Entry Cloud Demo</title>
+
+        <link href="${facesContext.externalContext.requestContextPath}/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="${facesContext.externalContext.requestContextPath}/css/jsfcrud.css" rel="stylesheet"/>
+        <style>
+            body {
+                margin-top: 10px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }    
+
+            .jumbotron {
+                background-image: url("${facesContext.externalContext.requestContextPath}/images/Istanbul_grand_bazar_1.jpg");
+                background-size: 50%;
+                background-position: right;
+                background-repeat: no-repeat;
+            }
+        </style>
+
+        <!--<script src="js/jquery.min.js"></script>-->
+        <script src="${facesContext.externalContext.requestContextPath}/js/jquery-2.1.1.min.js"></script>
+        <script src="${facesContext.externalContext.requestContextPath}/js/bootstrap.min.js"></script>
+        <script src="${facesContext.externalContext.requestContextPath}/js/bootbox.min.js"></script>
+        <script src="${facesContext.externalContext.requestContextPath}/js/main.js"></script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron col-sm-12">
+                    <h2 class="text-primary">Order Entry Cloud Demo</h2>
+                </div>
+            </div>
+
+            <h:panelGroup rendered="#{facesContext.externalContext.isUserInRole('Admins') or facesContext.externalContext.isUserInRole('Customers')}">
+                <div class="row panel">
+                    <div class="col-sm-6">
+                        <h:link outcome="/index" value="Home"/>
+                        |
+                        <h:panelGroup rendered="#{facesContext.externalContext.isUserInRole('Admins')}">
+                            <h:link outcome="/admin/customers/List" value="View Customers" />
+                            |
+                            <h:link outcome="/admin/orders/List" value="View Orders" />
+                            |
+                            <h:link outcome="/admin/productInformation/List" value="View Products"/>
+                            |
+                            <h:link outcome="/admin/orderItems/List" value="View Orders Items"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{facesContext.externalContext.isUserInRole('Customers')}">
+                            <h:link outcome="/shop/Shop" value="Browse Products"/>
+                            |
+                            <h:link outcome="/shop/Basket" value="Checkout"/>
+                            |
+                            <h:link outcome="/shop/MyOrders" value="My Orders"/>
+                        </h:panelGroup>
+                    </div>
+                    <div class="col-sm-4 text-right text-primary">
+                        ${request.remoteUser}
+                    </div>
+                    <div class="col-sm-1 text-center">|</div>
+                    <div class="col-sm-1 text-center">
+                        <a href="${facesContext.externalContext.requestContextPath}/logout.jsp">Logout</a>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <ui:insert name="content">Facelets Template Client Content</ui:insert>
+
+            <div class="row text-info text-center">
+                <p>Oracle</p>
+            </div>
+        </div>
+    </h:body>
+
+</html>

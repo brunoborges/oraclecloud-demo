@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbc-data-source xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
+    <name>jdbc/OE</name>
+    <jdbc-driver-params>
+        <!-- verify the URL below before deploying -->
+        <url>jdbc:oracle:thin:@//REPLACE-HERE-WITH-YOUR-DBCS-INSTANCE-HOSTNAME:1521/PDB1.compute-staug305744476.oraclecloud.internal</url>
+        <driver-name>oracle.jdbc.xa.client.OracleXADataSource</driver-name>
+        <properties>
+            <property>
+                <name>user</name>
+                <value>oe</value>
+            </property>
+        </properties>
+        <!-- password for 'welcome1' encrypted value. May differ for other WLS domains due to entropy -->
+        <!-- you must ssh and as sudo, run java weblogic.security.Encrypt to get the encrypted password -->
+        <password-encrypted>{AES}JX79l7OLD3zTYKBf9HEXytpfhtAMmTm2ceLo1zz2A+w=</password-encrypted>
+    </jdbc-driver-params>
+    <jdbc-data-source-params>
+        <jndi-name>jdbc/OE</jndi-name>
+    </jdbc-data-source-params>
+</jdbc-data-source>

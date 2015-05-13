@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCustomersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form">
+                <h3>Search Customers by Email</h3>
+
+                <div class="row panel">
+                    <div class="col-sm-5"><h:inputText class="form-control" id="searchByEmail" value="#{customersController.searchByEmail}" /></div>
+                    <div class="col-sm-2"><h:commandButton type="submit" styleClass="btn btn-success" value="Search" action="#{customersController.filter()}"/></div>
+                    <div class="col-sm-2"><h:commandButton type="submit" styleClass="btn btn-danger" value="Clear" action="#{customersController.clearFilter()}"/></div>
+                </div>
+
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCustomersEmpty}" rendered="#{customersController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{customersController.items.rowCount > 0}">
+                    <h:outputText value="#{customersController.pagination.pageFirstItem + 1}..#{customersController.pagination.pageLastItem + 1}/#{customersController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{customersController.previous}" value="#{bundle.Previous} #{customersController.pagination.pageSize}" rendered="#{customersController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{customersController.next}" value="#{bundle.Next} #{customersController.pagination.pageSize}" rendered="#{customersController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{customersController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_customerId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.customerId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_custFirstName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custFirstName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_custLastName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custLastName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_creditLimit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.creditLimit}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_custEmail}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custEmail}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_dateOfBirth}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateOfBirth}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_maritalStatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.maritalStatus}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_gender}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gender}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCustomersTitle_incomeLevel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.incomeLevel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{customersController.prepareView}" value="#{bundle.ListCustomersViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{customersController.prepareEdit}" value="#{bundle.ListCustomersEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{customersController.destroy}" value="#{bundle.ListCustomersDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{customersController.prepareCreate}" value="#{bundle.ListCustomersCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListCustomersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

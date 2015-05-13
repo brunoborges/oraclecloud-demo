@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOrderItemsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOrderItemsLabel_orderItemsPK_lineItemId}"/>
+                    <h:outputText value="#{orderItemsController.selected.orderItemsPK.lineItemId}" title="#{bundle.ViewOrderItemsTitle_orderItemsPK_lineItemId}"/>
+                    <h:outputText value="#{bundle.ViewOrderItemsLabel_unitPrice}"/>
+                    <h:outputText value="#{orderItemsController.selected.unitPrice}" title="#{bundle.ViewOrderItemsTitle_unitPrice}"/>
+                    <h:outputText value="#{bundle.ViewOrderItemsLabel_quantity}"/>
+                    <h:outputText value="#{orderItemsController.selected.quantity}" title="#{bundle.ViewOrderItemsTitle_quantity}"/>
+                    <h:outputText value="#{bundle.ViewOrderItemsLabel_orders}"/>
+                    <h:outputText value="#{orderItemsController.selected.order}" title="#{bundle.ViewOrderItemsTitle_orders}"/>
+                    <h:outputText value="#{bundle.ViewOrderItemsLabel_productId}"/>
+                    <h:outputText value="#{orderItemsController.selected.productId}" title="#{bundle.ViewOrderItemsTitle_productId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{orderItemsController.destroyAndView}" value="#{bundle.ViewOrderItemsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOrderItemsEditLink}"/>
+                <br />
+                <h:commandLink action="#{orderItemsController.prepareCreate}" value="#{bundle.ViewOrderItemsCreateLink}" />
+                <br />
+                <h:commandLink action="#{orderItemsController.prepareList}" value="#{bundle.ViewOrderItemsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOrderItemsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

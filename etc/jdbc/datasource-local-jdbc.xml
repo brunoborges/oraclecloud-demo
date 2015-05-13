@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbc-data-source xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
+    <name>jdbc/OE</name>
+    <jdbc-driver-params>
+        <url>jdbc:oracle:thin:@//192.168.56.101:1521/pdborcl</url>
+        <driver-name>oracle.jdbc.OracleDriver</driver-name>
+        <properties>
+            <property>
+                <name>user</name>
+                <value>oe</value>
+            </property>
+            <property>
+                <name>password</name>
+                <value>oe</value>
+            </property>
+        </properties>
+    </jdbc-driver-params>
+    <jdbc-data-source-params>
+        <jndi-name>jdbc/OE</jndi-name>
+    </jdbc-data-source-params>
+</jdbc-data-source>

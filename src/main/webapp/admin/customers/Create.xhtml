@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCustomersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_customerId}" for="customerId" />
+                    <h:inputText id="customerId" value="#{customersController.selected.customerId}" title="#{bundle.CreateCustomersTitle_customerId}" required="true" requiredMessage="#{bundle.CreateCustomersRequiredMessage_customerId}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_custFirstName}" for="custFirstName" />
+                    <h:inputText id="custFirstName" value="#{customersController.selected.custFirstName}" title="#{bundle.CreateCustomersTitle_custFirstName}" required="true" requiredMessage="#{bundle.CreateCustomersRequiredMessage_custFirstName}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_custLastName}" for="custLastName" />
+                    <h:inputText id="custLastName" value="#{customersController.selected.custLastName}" title="#{bundle.CreateCustomersTitle_custLastName}" required="true" requiredMessage="#{bundle.CreateCustomersRequiredMessage_custLastName}"/>
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_creditLimit}" for="creditLimit" />
+                    <h:inputText id="creditLimit" value="#{customersController.selected.creditLimit}" title="#{bundle.CreateCustomersTitle_creditLimit}" />
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_custEmail}" for="custEmail" />
+                    <h:inputText id="custEmail" value="#{customersController.selected.custEmail}" title="#{bundle.CreateCustomersTitle_custEmail}" />
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_dateOfBirth}" for="dateOfBirth" />
+                    <h:inputText id="dateOfBirth" value="#{customersController.selected.dateOfBirth}" title="#{bundle.CreateCustomersTitle_dateOfBirth}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_maritalStatus}" for="maritalStatus" />
+                    <h:inputText id="maritalStatus" value="#{customersController.selected.maritalStatus}" title="#{bundle.CreateCustomersTitle_maritalStatus}" />
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_gender}" for="gender" />
+                    <h:inputText id="gender" value="#{customersController.selected.gender}" title="#{bundle.CreateCustomersTitle_gender}" />
+                    <h:outputLabel value="#{bundle.CreateCustomersLabel_incomeLevel}" for="incomeLevel" />
+                    <h:inputText id="incomeLevel" value="#{customersController.selected.incomeLevel}" title="#{bundle.CreateCustomersTitle_incomeLevel}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{customersController.create}" value="#{bundle.CreateCustomersSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{customersController.prepareList}" value="#{bundle.CreateCustomersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCustomersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

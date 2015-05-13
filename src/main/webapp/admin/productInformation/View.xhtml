@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewProductInformationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_productId}"/>
+                    <h:outputText value="#{productInformationController.selected.productId}" title="#{bundle.ViewProductInformationTitle_productId}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_productName}"/>
+                    <h:outputText value="#{productInformationController.selected.productName}" title="#{bundle.ViewProductInformationTitle_productName}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_productDescription}"/>
+                    <h:outputText value="#{productInformationController.selected.productDescription}" title="#{bundle.ViewProductInformationTitle_productDescription}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_categoryId}"/>
+                    <h:outputText value="#{productInformationController.selected.categoryId}" title="#{bundle.ViewProductInformationTitle_categoryId}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_weightClass}"/>
+                    <h:outputText value="#{productInformationController.selected.weightClass}" title="#{bundle.ViewProductInformationTitle_weightClass}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_productStatus}"/>
+                    <h:outputText value="#{productInformationController.selected.productStatus}" title="#{bundle.ViewProductInformationTitle_productStatus}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_listPrice}"/>
+                    <h:outputText value="#{productInformationController.selected.listPrice}" title="#{bundle.ViewProductInformationTitle_listPrice}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_minPrice}"/>
+                    <h:outputText value="#{productInformationController.selected.minPrice}" title="#{bundle.ViewProductInformationTitle_minPrice}"/>
+                    <h:outputText value="#{bundle.ViewProductInformationLabel_catalogUrl}"/>
+                    <h:outputText value="#{productInformationController.selected.catalogUrl}" title="#{bundle.ViewProductInformationTitle_catalogUrl}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{productInformationController.destroyAndView}" value="#{bundle.ViewProductInformationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewProductInformationEditLink}"/>
+                <br />
+                <h:commandLink action="#{productInformationController.prepareCreate}" value="#{bundle.ViewProductInformationCreateLink}" />
+                <br />
+                <h:commandLink action="#{productInformationController.prepareList}" value="#{bundle.ViewProductInformationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewProductInformationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

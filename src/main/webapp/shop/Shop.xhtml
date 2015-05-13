@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <!-- Custom styles for this template -->
+        <link href="css/cover.css" rel="stylesheet" />
+        <link href="css/prettify.css" rel="stylesheet" />
+        <link href="css/main.css" rel="stylesheet" />
+    </h:head>
+
+    <body>
+        <ui:composition template="/WEB-INF/template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{bundle.ListProductInformationTitle}"></h:outputText>
+            </ui:define>
+            <ui:define name="content">
+                <!--<div class="inner cover text-left" style="margin-top: 90px;">-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title"><strong>Products</strong></h1>
+                                </div>
+                                <div class="panel-body">
+                                    <h:form role="form" id="formulario">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h:panelGroup layout="block"  styleClass="alert-warning" class="errorMessages" rendered="#{facesContext.validationFailed}">
+                                                    <h3>Errors found:</h3>
+                                                    <h:messages id="messages" />
+                                                </h:panelGroup>
+                                                <h:panelGroup layout="block" rendered="#{facesContext.validationFailed}">
+                                                    <script>
+                                                        bootbox.alert($(".errorMessages")[0].outerHTML, function () {
+                                                            $(".errorMessages").hide()
+                                                        });
+                                                    </script>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" id="filtroProdutos" placeholder="Filter" /><br/>
+                                                <h:selectManyListbox id="listaProdutos" value="#{productInformationController.produtosSelecionados}" size="16" styleClass="listaProdutos form-control">
+                                                    <f:selectItems var="prod" itemLabelEscaped="true" itemLabel="#{prod.productName}" itemValue="#{prod.productId}" value="#{productInformationController.produtosDisponiveis}"/>
+                                                </h:selectManyListbox>
+                                            </div>
+                                            <div class="form-group col-md-8" style="height:337px; overflow-x: hidden; overflow-y: auto">
+                                                <h:panelGroup layout="block" style="width: 100%" styleClass="text-center text-info h5" rendered="#{empty productInformationController.tabelaProdutos}">
+                                                    <br/><br/>
+                                                    Select products on your left and add them to the list.
+                                                </h:panelGroup>
+
+                                                <h:dataTable id="tabelaProdutos" value="#{productInformationController.tabelaProdutos}" var="item"
+                                                             columnClasses="col80p,col20p" rendered="#{not empty productInformationController.tabelaProdutos}"
+                                                             styleClass="table table-striped" style="width: 90%; text-align: left">
+                                                    <h:column id="colProduto">
+                                                        <f:facet name="header">Product</f:facet>
+                                                        <h:outputText value="#{item.product.productName}" escape="true" />
+                                                    </h:column>
+
+                                                    <h:column id="colPrice">
+                                                        <f:facet name="header">Price</f:facet>
+                                                        $ <h:outputText value="#{item.product.listPrice}" escape="true" />
+                                                    </h:column>
+
+                                                    <h:column id="colQuantidade" >
+                                                        <f:facet name="header">Quantity</f:facet>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h:inputText style="width: 60px" value="#{item.quantity}" styleClass="form-control" />
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h:commandButton action="#{productInformationController.removerItemTabela(item)}" value="-" styleClass="btn btn-danger glyphicon glyphicon-minus" />
+                                                            </div>
+                                                        </div>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </div>
+                                        </div>
+
+                                        <!-- BOTOES -->
+                                        <div class="row">
+                                            <div class="col-md-4 text-center">
+                                                <h:commandButton action="#{productInformationController.incluirProduto()}" value="+" styleClass="btn btn btn-info glyphicon glyphicon-plus" />
+                                            </div>
+                                            <div class="col-md-8 text-right">
+                                                <h:commandButton action="#{productInformationController.removeAllItems()}" value="Remove All" styleClass="btn btn-danger glyphicon glyphicon-minus" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <h:link value="Cancel" outcome="/index" styleClass="btn btn-warning" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <h:commandButton type="submit" styleClass="btn btn-success" value="Add To Basket!" action="#{productInformationController.addToBasket()}"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bootstrap core JavaScript
+                ================================================== -->
+                <!-- Placed at the end of the document so the pages load faster -->
+                <script>
+                    $(function () {
+                        $(".listaProdutos").filterByText($('#filtroProdutos'));
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
