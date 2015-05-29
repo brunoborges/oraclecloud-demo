@@ -39,7 +39,7 @@
   </security-constraint>
   <login-config>
     <auth-method>FORM</auth-method>
-    <realm-name>demorealm</realm-name>
+    <realm-name>OERealm</realm-name>
     <form-login-config>
       <form-login-page>/faces/login.xhtml</form-login-page>
       <form-error-page>/faces/error.xhtml</form-error-page>
