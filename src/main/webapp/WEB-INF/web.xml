@@ -1,81 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
-    
-    <display-name>jcs-oe-sample</display-name>
-    
-    <session-config>
-        <session-timeout>
-            45
-        </session-timeout>
-    </session-config>
-    
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-    
-    <security-constraint>
-        <display-name>OrderEntryCloudDemo Customers Access</display-name>
-        <web-resource-collection>
-            <web-resource-name>OrderEntryCloudDemo Customers Access</web-resource-name>
-            <description></description>
-            <url-pattern>/faces/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description></description>
-            <role-name>Customers</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <display-name>OrderEntryCloudDemo Administrators Access</display-name>
-        <web-resource-collection>
-            <web-resource-name>OrderEntryCloudDemo Administrators Access</web-resource-name>
-            <description></description>
-            <url-pattern>/faces/*</url-pattern>
-            <url-pattern>/faces/admin/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description></description>
-            <role-name>Admins</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <realm-name>myrealm</realm-name>
-        <form-login-config>
-            <form-login-page>/faces/login.xhtml</form-login-page>
-            <form-error-page>/faces/error.xhtml</form-error-page>
-        </form-login-config>
-    </login-config>
-    
-    <security-role>
-        <role-name>Admins</role-name>
-    </security-role>
-    <security-role>
-        <role-name>Customers</role-name>
-    </security-role>
-    
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
-    
-    <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-    </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>jcs-oe-sample</display-name>
+  <session-config>
+    <session-timeout>45</session-timeout>
+  </session-config>
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  <security-constraint>
+    <display-name>OrderEntryCloudDemo Customers Access</display-name>
+    <web-resource-collection>
+      <web-resource-name>OrderEntryCloudDemo Customers Access</web-resource-name>
+      <description></description>
+      <url-pattern>/faces/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <description></description>
+      <role-name>Customers</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-constraint>
+    <display-name>OrderEntryCloudDemo Administrators Access</display-name>
+    <web-resource-collection>
+      <web-resource-name>OrderEntryCloudDemo Administrators Access</web-resource-name>
+      <description></description>
+      <url-pattern>/faces/*</url-pattern>
+      <url-pattern>/faces/admin/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <description></description>
+      <role-name>Admins</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>demorealm</realm-name>
+    <form-login-config>
+      <form-login-page>/faces/login.xhtml</form-login-page>
+      <form-error-page>/faces/error.xhtml</form-error-page>
+    </form-login-config>
+  </login-config>
+  <security-role>
+    <role-name>Admins</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Customers</role-name>
+  </security-role>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>faces/index.xhtml</welcome-file>
+  </welcome-file-list>
 </web-app>

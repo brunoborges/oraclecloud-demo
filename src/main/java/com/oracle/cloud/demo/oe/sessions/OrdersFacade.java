@@ -13,66 +13,72 @@ import javax.persistence.criteria.Root;
 import com.oracle.cloud.demo.oe.entities.Customer;
 import com.oracle.cloud.demo.oe.entities.Order;
 import com.oracle.cloud.demo.oe.entities.OrderItem;
+import com.oracle.cloud.demo.oe.entities.OrderStatus;
 
 @Stateless
 public class OrdersFacade extends AbstractFacade<Order> {
 
-    @PersistenceContext
-    private EntityManager em;
-    private String filterByCustomerEmail;
+	private String filterByCustomerEmail;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@PersistenceContext
+	private EntityManager em;
 
-    public OrdersFacade() {
-        super(Order.class);
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public void setFilterByCustomerEmail(String email) {
-        this.filterByCustomerEmail = email;
-    }
+	public OrdersFacade() {
+		super(Order.class);
+	}
 
-    @Override
-    protected CriteriaQuery filterQuery(CriteriaQuery query, Root<Order> rt) {
-        if (filterByCustomerEmail == null) {
-            return query;
-        }
+	public void setFilterByCustomerEmail(String email) {
+		this.filterByCustomerEmail = email;
+	}
 
-        if (filterByCustomerEmail != null && filterByCustomerEmail.trim().isEmpty() == false) {
-            CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-            query.where(
-                    cb.like(
-                            rt.<Customer>get("customer")
-                            .<String>get("custEmail"),
-                            "%" + filterByCustomerEmail + "%"));
-        }
-        return query;
-    }
+	@Override
+	protected CriteriaQuery filterQuery(CriteriaQuery query, Root<Order> rt) {
+		if (filterByCustomerEmail == null) {
+			return query;
+		}
 
-    @Override
-    protected CriteriaQuery orderByQuery(CriteriaQuery query, Root<Order> rt) {
-        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        return query.orderBy(cb.desc(rt.get("orderDate")));
-    }
+		if (filterByCustomerEmail != null
+				&& filterByCustomerEmail.trim().isEmpty() == false) {
+			CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+			query.where(cb.like(
+					rt.<Customer> get("customer").<String> get("custEmail"),
+					"%" + filterByCustomerEmail + "%"));
+		}
+		return query;
+	}
 
-    public List<Order> getOrdersByCustomerEmail(String customerEmail) {
-        return em.createNamedQuery("Order.findByCustomerEmail")
-                .setParameter("customerEmail", customerEmail)
-                .getResultList();
-    }
+	@Override
+	protected CriteriaQuery orderByQuery(CriteriaQuery query, Root<Order> rt) {
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		return query.orderBy(cb.desc(rt.get("orderDate")));
+	}
 
-    public List<OrderItem> getItemsByCustomerEmailAndOrderId(String customerEmail, Integer orderId) {
-        List<OrderItem> orderItems = (List<OrderItem>) em.createNamedQuery("OrderItem.findByOrderIdAndCustomerEmail")
-                .setParameter("customerEmail", customerEmail)
-                .setParameter("orderId", orderId)
-                .getResultList();
+	public List<Order> getOrdersByCustomerEmail(String customerEmail) {
+		return em.createNamedQuery("Order.findByCustomerEmail")
+				.setParameter("customerEmail", customerEmail).getResultList();
+	}
 
-        if (orderItems == null) {
-            return Collections.emptyList();
-        }
+	public List<OrderItem> getItemsByCustomerEmailAndOrderId(
+			String customerEmail, Integer orderId) {
+		List<OrderItem> orderItems = (List<OrderItem>) em
+				.createNamedQuery("OrderItem.findByOrderIdAndCustomerEmail")
+				.setParameter("customerEmail", customerEmail)
+				.setParameter("orderId", orderId).getResultList();
 
-        return orderItems;
-    }
+		if (orderItems == null) {
+			return Collections.emptyList();
+		}
+
+		return orderItems;
+	}
+
+	public void orderDelivered(Order order) {
+		order.setOrderStatus(OrderStatus.DELIVERED.getValue());
+		em.persist(order);
+	}
 }
