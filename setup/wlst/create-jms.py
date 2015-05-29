@@ -1,35 +1,50 @@
-# variables
-username = 'weblogic'
-password = 'welcome1'
-URL='t3://localhost:12120'
+from java.io import FileInputStream
+
+# Variables loaded from properties file
+propInputStream = FileInputStream('jcs.properties')
+configProps = Properties()
+configProps.load(propInputStream)
+
+# Variables
+username = configProps.get('username')
+password = configProps.get('password')
+URL = configProps.get('URL')
+
+#========================
+#Connect To Domain
+#========================
+connect(username,password,URL)
+edit()
 startEdit()
 
+# -----------------------
+# Use the default '<domainName>__server_1' in JCS
+# -----------------------
+domainName = cmo.getName()
+serverName = domainName + '__server_1'
 cd('/')
 cmo.createJMSServer('DemoJMSServer')
 
 cd('/JMSServers/DemoJMSServer')
-set('Targets',jarray.array([ObjectName('com.bea:Name=AdminServer,Type=Server')], ObjectName))
+set('Targets',jarray.array([ObjectName('com.bea:Name='+serverName+',Type=Server')], ObjectName))
 
 activate()
-
 startEdit()
 
 cd('/')
 cmo.createJMSSystemResource('DemoJMSSystemModule')
 
 cd('/JMSSystemResources/DemoJMSSystemModule')
-set('Targets',jarray.array([ObjectName('com.bea:Name=AdminServer,Type=Server')], ObjectName))
+set('Targets',jarray.array([ObjectName('com.bea:Name='+serverName+',Type=Server')], ObjectName))
 
 activate()
-
 startEdit()
-cmo.createSubDeployment('DemoSubdeployment')
 
+cmo.createSubDeployment('DemoSubdeployment')
 cd('/JMSSystemResources/DemoJMSSystemModule/SubDeployments/DemoSubdeployment')
 set('Targets',jarray.array([ObjectName('com.bea:Name=DemoJMSServer,Type=JMSServer')], ObjectName))
 
 activate()
-
 startEdit()
 
 cd('/JMSSystemResources/DemoJMSSystemModule/JMSResource/DemoJMSSystemModule')
@@ -53,7 +68,6 @@ cd('/JMSSystemResources/DemoJMSSystemModule/JMSResource/DemoJMSSystemModule/Conn
 cmo.setDefaultTargetingEnabled(true)
 
 activate()
-
 startEdit()
 
 cd('/JMSSystemResources/DemoJMSSystemModule/JMSResource/DemoJMSSystemModule')
@@ -67,5 +81,4 @@ cd('/JMSSystemResources/DemoJMSSystemModule/SubDeployments/DemoSubdeployment')
 set('Targets',jarray.array([ObjectName('com.bea:Name=DemoJMSServer,Type=JMSServer')], ObjectName))
 
 activate()
-
-startEdit()
+exit()

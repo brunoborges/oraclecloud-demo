@@ -1,18 +1,37 @@
-# variables
-username = 'weblogic'
-password = 'welcome1'
-URL='t3://localhost:7001'
-domain='base_domain'
-realm='myrealm'
-realm_path='/SecurityConfiguration/'+domain+'/Realms/'+realm
-datasourceName='jdbc/OE'
+from java.io import FileInputStream
+
+# Variables loaded from properties file
+propInputStream = FileInputStream('jcs.properties')
+configProps = Properties()
+configProps.load(propInputStream)
+
+# Variables
+username = configProps.get('username')
+password = configProps.get('password')
+URL = configProps.get('URL')
+datasource_jndi=configProps.get('datasource_jndi')
+realm=configProps.get('realm')
 
 # Connect and Activate Edit Mode
 connect(username,password,URL)
 edit()
 startEdit()
 
-# Create Authenticator
+domainName = cmo.getName()
+realm_path='/SecurityConfiguration/'+domainName+'/Realms/'+realm
+
+# Create Security Realm
+cd('/SecurityConfiguration/'+domainName)
+cmo.createRealm(realm)
+
+# Create Default (WebLogic) Authenticator for Admin User
+cd(realm_path)
+cmo.setDeployCredentialMappingIgnored(false)
+cmo.createAuthenticationProvider('WebLogicProvider', 'weblogic.security.providers.authentication.DefaultAuthenticator')
+cd('/SecurityConfiguration/'+domainName+'/Realms/'+realm+'/AuthenticationProviders/WebLogicProvider')
+cmo.setControlFlag('OPTIONAL')
+
+# Create SQL Authenticator
 cd(realm_path)
 cmo.createAuthenticationProvider('OEAuthenticator', 'weblogic.security.providers.authentication.SQLAuthenticator')
 
@@ -23,7 +42,7 @@ cmo.setPasswordStyle('SALTEDHASHED')
 
 cmo.setSQLListGroups('SELECT SG_NAME FROM SECURITY_GROUPS WHERE SG_NAME like ?')
 cmo.setDescriptionsSupported(false)
-cmo.setDataSourceName(datasourceName)
+cmo.setDataSourceName(datasource_jndi)
 cmo.setSQLListMemberGroups('SELECT sg.sg_name FROM Customers c,Security_Groups sg, Customers_Group cg WHERE c.customer_id=cg.csg_cust_id and cg.csg_sg_id=sg.sg_id and c.cust_email=?')
 cmo.setSQLUserExists('SELECT CUSTOMERS.CUST_EMAIL FROM  CUSTOMERS where CUSTOMERS.CUST_EMAIL=?')
 cmo.setSQLIsMember('SELECT c.cust_email FROM Customers c,Security_Groups sg, Customers_Group cg WHERE c.customer_id=cg.csg_cust_id and cg.csg_sg_id=sg.sg_id AND sg.sg_name=? and c.cust_email=?')
@@ -45,17 +64,17 @@ cmo.setSQLRemoveGroupMember('')
 cmo.setSQLSetGroupDescription('')
 cmo.setSQLGetUserDescription('')
 
-activate()
-startEdit()
+#activate()
+#startEdit()
 
-cd(realm_path)
-set('AuthenticationProviders',jarray.array([ObjectName('Security:Name=myrealmDefaultAuthenticator'), ObjectName('Security:Name=myrealmOEAuthenticator'), ObjectName('Security:Name=myrealmDefaultIdentityAsserter')], ObjectName))
+#cd(realm_path)
+#set('AuthenticationProviders',jarray.array([ObjectName('Security:Name=myrealmDefaultAuthenticator'), ObjectName('Security:Name=myrealmOEAuthenticator'), ObjectName('Security:Name=myrealmDefaultIdentityAsserter')], ObjectName))
 
-activate()
-startEdit()
+#activate()
+#startEdit()
 
-cd(realm_path+'/AuthenticationProviders/DefaultAuthenticator')
-cmo.setControlFlag('SUFFICIENT')
+#cd(realm_path+'/AuthenticationProviders/DefaultAuthenticator')
+#cmo.setControlFlag('SUFFICIENT')
 
 activate()
 dumpStack()
