@@ -5,14 +5,14 @@
 # has option "requiretty" disabled/commented
 #
 # About this script: util script to run WLST on a JCS server
-# For usage instructions, run: $ ./jcs-wlst.sh -h
+# For usage instructions, run: $ ./wlst-jcs.sh -h
 #
 # Author: Bruno Borges <bruno.borges@oracle.com>
 # Since : 2015, May
 #
 usage() {
 cat << EOF
-Usage: jcs-wlst.sh -s jcs-instance-address -k private-ssh-key -f wlst-file.py
+Usage: wlst-jcs.sh -s jcs-instance-address [-k private-ssh-key] -f wlst-file.py
 Runs a WLST file on a remote JCS server instance.
  
 Parameters:
