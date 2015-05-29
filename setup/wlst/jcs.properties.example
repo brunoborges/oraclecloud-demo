@@ -1,0 +1,10 @@
+username=weblogic
+password=
+instance=
+URL=t3://public-ip-address-jcs:7003
+datasource_name=OE
+datasource_jndi=jdbc/OE
+datasource_url=jdbc:oracle:thin:@//dbcs-instance-name:1521/YOURPDB.your-identity-domain.oraclecloud.internal
+datasource_username=oe
+datasource_password=oe
+realm=OERealm
