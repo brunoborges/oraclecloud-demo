@@ -16,7 +16,7 @@ datasource_username=configProps.get('datasource_username')
 datasource_password=configProps.get('datasource_password')
 
 #========================
-#Connect To Domain
+# Connect to domain
 #========================
 connect(username,password,URL)
 edit()

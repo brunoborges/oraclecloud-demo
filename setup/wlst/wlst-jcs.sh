@@ -2,7 +2,9 @@
 #
 # IMPORTANT! 
 # To use this script, make sure that /etc/sudoers in the remote machine
-# has option "requiretty" disabled/commented
+# has option "requiretty" disabled/commented. On recent versions of JCS instances,
+# this option comes enabled, preventing the use of this script. Use visudo to edit 
+# /etc/sudoers and disable this option.
 #
 # About this script: util script to run WLST on a JCS server
 # For usage instructions, run: $ ./wlst-jcs.sh -h
@@ -54,12 +56,13 @@ scp $PRIVKEY $SCRIPT $REMOTE:/tmp/$SCRIPT
 
 # Execute WLST script on remote server
 ssh $PRIVKEY $REMOTE "WLST=$SCRIPT /bin/bash -s" <<'ENDSSHSESSION'
-  echo $WLST > /tmp/wlst_remote__0
-  chmod a+r /tmp/wlst_remote__0
+  echo $WLST > /tmp/wlst_remote
+  chmod a+r /tmp/wlst_remote
+  chmod a+r /tmp/$WLST
   sudo su - oracle
   cd ${DOMAIN_HOME}/bin
   source setDomainEnv.sh
-  java weblogic.WLST -skipWLSModuleScanning /tmp/`cat /tmp/wlst_remote__0`
+  java weblogic.WLST -skipWLSModuleScanning /tmp/`cat /tmp/wlst_remote`
   exit
-  rm /tmp/wlst_remote__0
+  rm /tmp/wlst_remote
 ENDSSHSESSION

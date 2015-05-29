@@ -29,7 +29,7 @@ cd(realm_path)
 cmo.setDeployCredentialMappingIgnored(false)
 cmo.createAuthenticationProvider('WebLogicProvider', 'weblogic.security.providers.authentication.DefaultAuthenticator')
 cd('/SecurityConfiguration/'+domainName+'/Realms/'+realm+'/AuthenticationProviders/WebLogicProvider')
-cmo.setControlFlag('OPTIONAL')
+cmo.setControlFlag('SUFFICIENT')
 
 # Create SQL Authenticator
 cd(realm_path)

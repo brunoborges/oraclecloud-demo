@@ -1,0 +1,20 @@
+# WLST Scripts for Managing and Customizing WebLogic Instances
+These scripts are used to add required resources by the application such as:
+
+ - JDBC Data Sources
+ - JMS Servers, Queues, Connection Factories
+ - Security Realms
+
+Modify jcs.properties with the corresponding information of your WebLogic or JCS instance.
+
+The following scripts can be executed using the local wlst.sh from on premise WebLogic installation:
+
+ - create-datasource.py
+ - create-jms.py
+ - create-security-realm.py
+ - start-all-managedservers.py
+ - stop-all-servers.py
+
+The following script must be executed using wlst-jcs.sh shell script:
+
+ - start-admin.py

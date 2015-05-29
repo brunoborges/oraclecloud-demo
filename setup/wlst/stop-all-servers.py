@@ -20,8 +20,6 @@ def findAdminServer():
     cd(previousLocation)
     return adminServer
 
-adminservername = findAdminServer()
-
 def getMSserverStatus(server):
     try:
        cd('/ServerLifeCycleRuntimes/' +server)
@@ -30,6 +28,7 @@ def getMSserverStatus(server):
     return cmo.getState()
 
 connect(username, password, URL)
+adminservername = findAdminServer()
 domainConfig()
 allServers = cmo.getServers()
 domainRuntime()
