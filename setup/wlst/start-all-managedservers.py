@@ -1,3 +1,5 @@
+from java.io import FileInputStream
+
 # Variables loaded from properties file
 propInputStream = FileInputStream('jcs.properties')
 configProps = Properties()
