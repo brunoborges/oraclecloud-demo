@@ -7,7 +7,7 @@
 # 
 # Run this with jcs-wlst.sh:
 # 
-# $ ./jcs-wlst.sh -s jcs-ip-address -k privatekey -f start-admin.py
+# $ ./wlst-jcs.sh -s jcs-ip-address -k privatekey -f start-admin.py
 # 
 username = 'weblogic'
 password = 'Welcome1#'
