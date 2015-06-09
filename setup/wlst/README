@@ -15,6 +15,6 @@ The following scripts can be executed using the local wlst.sh from on premise We
  - start-all-managedservers.py
  - stop-all-servers.py
 
-The following script must be executed using wlst-jcs.sh shell script:
+The following script must be executed with an SSL Tunnel enabled, or properly adjusted to be executed with wlst-jcs.sh shell script:
 
  - start-admin.py
