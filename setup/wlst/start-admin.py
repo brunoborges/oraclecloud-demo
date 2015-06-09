@@ -1,18 +1,21 @@
+#
+# Starts the AdminServer of a JCS Instance
 # 
-# This script must be executed inside the JCS VM
+# Create an SSH Tunnel to port 5556 (Node Manager) of your JCS Instance 
+
 # Edit the username/password/instance values below
 #  - username: the weblogic admin username
 #  - password: the password of username
 #  - instance: the name of your JCS instance
-# 
-# Run this with jcs-wlst.sh:
-# 
-# $ ./wlst-jcs.sh -s jcs-ip-address -k privatekey -f start-admin.py
-# 
+#
+# Author: bruno.borges@oracle.com 
+#
 username = 'weblogic'
 password = 'Welcome1#'
 instance = 'demojcs'
+hostname = 'localhost'
+portnumb = '5556'
 
-nmConnect(username, password, instance + '-wls-1', '5556', instance + '_domain', '/u01/data/domains/' + instance + '_domain', 'SSL')
+nmConnect(username, password, hostname, portnumb, instance + '_domain', '/u01/data/domains/' + instance + '_domain', 'SSL')
 nmStart(instance+'__adminserver')
 exit()
