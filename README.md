@@ -93,3 +93,6 @@ alter session set container=pdb1;
 alter user oe account unlock identified by welcome1;
 $ sqlplus oe/welcome1@pdb1
 '''
+
+# Copyright
+Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.

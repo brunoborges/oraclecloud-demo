@@ -1,3 +1,6 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.rest;
 
 import com.oracle.cloud.demo.oe.entities.Customer;

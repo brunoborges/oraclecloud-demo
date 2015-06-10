@@ -1,3 +1,4 @@
+# Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
 from java.io import FileInputStream
 
 # Variables loaded from properties file

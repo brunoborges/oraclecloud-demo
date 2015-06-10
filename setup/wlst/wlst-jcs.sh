@@ -12,6 +12,8 @@
 # Author: Bruno Borges <bruno.borges@oracle.com>
 # Since : 2015, May
 #
+# Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+#
 usage() {
 cat << EOF
 Usage: wlst-jcs.sh -s jcs-instance-address [-k private-ssh-key] -f wlst-file.py

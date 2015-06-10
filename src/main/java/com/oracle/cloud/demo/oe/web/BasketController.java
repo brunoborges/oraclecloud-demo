@@ -1,3 +1,6 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.web;
 
 import com.oracle.cloud.demo.oe.entities.Order;
@@ -14,11 +17,16 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * @author Bruno Borges
+ */
 @SessionScoped
 @Named("basket")
 public class BasketController implements Serializable {
 
-    private final List<BasketItem> products = new ArrayList<>();
+	private static final long serialVersionUID = 1L;
+
+	private final List<BasketItem> products = new ArrayList<>();
 
     private BigDecimal total = BigDecimal.ZERO;
 

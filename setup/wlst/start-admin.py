@@ -1,3 +1,5 @@
+# Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+
 #
 # Starts the AdminServer of a JCS Instance
 # 

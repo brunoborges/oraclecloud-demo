@@ -1,3 +1,6 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.web;
 
 import com.oracle.cloud.demo.oe.sessions.CustomersFacade;
@@ -18,11 +21,15 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ * @author Bruno Borges
+ */
 @Named("customersController")
 @SessionScoped
 public class CustomersController implements Serializable {
 
-    private Customer current;
+	private static final long serialVersionUID = 1L;
+	private Customer current;
     private DataModel items = null;
     @EJB
     private CustomersFacade ejbFacade;

@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
  */
-
 package com.oracle.cloud.demo.oe.sessions;
 
 import com.oracle.cloud.demo.oe.entities.OrderItem;
@@ -12,8 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author bruno
+ * @author Bruno Borges
  */
 @Stateless
 public class OrderItemsFacade extends AbstractFacade<OrderItem> {

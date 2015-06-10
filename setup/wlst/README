@@ -18,3 +18,6 @@ The following scripts can be executed using the local wlst.sh from on premise We
 The following script must be executed with an SSL Tunnel enabled, or properly adjusted to be executed with wlst-jcs.sh shell script:
 
  - start-admin.py
+
+ # Copyright
+ Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved. 

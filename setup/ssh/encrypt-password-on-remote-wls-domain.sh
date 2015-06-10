@@ -4,6 +4,8 @@
 # 
 # Inform user (usually 'opc'), ipaddress, and absolute path of your private key
 #
+# Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+
 REMOTE_USER=opc
 REMOTE_SERVER=129.152.151.123
 PRIVATE_KEY=

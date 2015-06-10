@@ -1,3 +1,6 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.sessions;
 
 import javax.ejb.ActivationConfigProperty;
@@ -10,6 +13,9 @@ import javax.jms.ObjectMessage;
 
 import com.oracle.cloud.demo.oe.entities.Order;
 
+/**
+ * @author Bruno Borges
+ */
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "jms/OEProcessOrders"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue") }, name = "ProcessOrderMDB", mappedName = "jms/OEProcessOrders")

@@ -1,3 +1,6 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.sessions;
 
 import java.util.Collections;
@@ -15,6 +18,10 @@ import com.oracle.cloud.demo.oe.entities.Order;
 import com.oracle.cloud.demo.oe.entities.OrderItem;
 import com.oracle.cloud.demo.oe.entities.OrderStatus;
 
+/**
+ * 
+ * @author Bruno Borges
+ */
 @Stateless
 public class OrdersFacade extends AbstractFacade<Order> {
 

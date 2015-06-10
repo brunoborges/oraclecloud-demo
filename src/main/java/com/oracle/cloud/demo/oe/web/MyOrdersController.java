@@ -1,16 +1,25 @@
+/**
+ * Copyright © 2015, 2015, Oracle and/or its affiliates. All rights reserved.
+ */
 package com.oracle.cloud.demo.oe.web;
 
-import com.oracle.cloud.demo.oe.entities.Order;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+/**
+ * 
+ * @author Bruno Borges
+ *
+ */
 @Named("myOrdersController")
 @SessionScoped
 public class MyOrdersController extends OrdersController {
 
-    @PostConstruct
+	private static final long serialVersionUID = 1L;
+
+	@PostConstruct
     public void postConstruct() {
         String userEmail = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
 
